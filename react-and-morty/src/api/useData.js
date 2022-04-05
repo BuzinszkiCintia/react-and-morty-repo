@@ -1,0 +1,49 @@
+import { useEffect } from "react";
+import { useFetch } from "./useFetch.js";
+import { mainUrls } from "./dataRoutes.js";
+
+/**
+     Fetch data from an open-source API. It returns json containing pagination.
+     The json contains an `info` and a `results` property. The `info` contains every information about the pagination,
+     the `results` contains the characters objects situated in the given page number in the pagination.
+     *
+     * @param pageNum integer that gives the pagination page number. The json `info` property contains how many pages are.
+     */
+export const useCharacters = (pageNum = 1) => {
+  const [characters, setUrl] = useFetch(mainUrls.characters + pageNum);
+  useEffect(() => {
+    setUrl(mainUrls.characters + pageNum);
+  }, [pageNum, setUrl]);
+  return characters === undefined ? "Loading..." : characters;
+};
+
+/**
+     Fetch data from an open-source API. It returns json containing pagination.
+     The json contains an `info` and a `results` property. The `info` contains every information about the pagination,
+     the `results` contains the locations objects situated in the given page number in the pagination.
+     *
+     * @param pageNum integer that gives the pagination page number. The json `info` property contains how many pages are.
+     */
+export const useLocations = (pageNum = 1) => {
+  const [locations, setUrl] = useFetch(mainUrls.locations + pageNum);
+  useEffect(() => {
+    setUrl(mainUrls.locations + pageNum);
+  }, [pageNum, setUrl]);
+  return locations === undefined ? "Loading..." : locations;
+};
+
+export const useCharacter = (id = 1) => {
+  const [character, setUrl] = useFetch(mainUrls.character + id);
+  useEffect(() => {
+    setUrl(mainUrls.character + id);
+  }, [id, setUrl]);
+  return character === undefined ? "Loading..." : character;
+};
+
+export const useLocation = (id = 1) => {
+  const [location, setUrl] = useFetch(mainUrls.location + id);
+  useEffect(() => {
+    setUrl(mainUrls.location + id);
+  }, [id, setUrl]);
+  return location === undefined ? "Loading..." : location;
+};
